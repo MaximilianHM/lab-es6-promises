@@ -66,42 +66,48 @@ const steakSteps = new Promise(function (resolve, reject) {});
 obtainInstruction("steak", 0)
   .then((step0) => {
     document.querySelector("#steak").innerHTML += `<li>${step0}</li>`;
+    return obtainInstruction("steak", 1);
   })
   .then((step1) => {
     document.querySelector("#steak").innerHTML += `<li>${step1}</li>`;
+    return obtainInstruction("steak", 2);
   })
   .then((step2) => {
     document.querySelector("#steak").innerHTML += `<li>${step2}</li>`;
+    return obtainInstruction("steak", 3);
   })
   .then((step3) => {
     setTimeout(() => {
       document.querySelector("#steak").innerHTML += `<li>${step3}</li>`;
     }, 2000);
+    return obtainInstruction("steak", 4);
   })
   .then((step4) => {
     setTimeout(() => {
       document.querySelector("#steak").innerHTML += `<li>${step4}</li>`;
     }, 4000);
+    return obtainInstruction("steak", 5);
   })
   .then((step5) => {
     setTimeout(() => {
       document.querySelector("#steak").innerHTML += `<li>${step5}</li>`;
     }, 4000);
+    return obtainInstruction("steak", 6);
   })
   .then((step6) => {
     setTimeout(() => {
       document.querySelector("#steak").innerHTML += `<li>${step6}</li>`;
     }, 4000);
+    return obtainInstruction("steak", 7);
   })
   .then((step7) => {
     setTimeout(() => {
       document.querySelector("#steak").innerHTML += `<li>${step7}</li>`;
-    }, 4000);
-  })
-  .then(() => {
-    setTimeout(() => {
       document.querySelector("#steakImg").removeAttribute("hidden");
     }, 4000);
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
 // Iteration 3 using async/await
@@ -137,10 +143,10 @@ async function getBroccoli() {
     document.querySelector("#broccoli").innerHTML += `<li>${step6}</li>`;
     const step7 = await broccoliRecepie(6);
     document.querySelector("#broccoli").innerHTML += `<li>${step7}</li>`;
-    const step8 = document
-      .querySelector("#broccoliImg")
-      .removeAttribute("hidden");
-  } catch (err) {}
+    document.querySelector("#broccoliImg").removeAttribute("hidden");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 getBroccoli();
@@ -151,51 +157,35 @@ getBroccoli();
 const brusselsSteps = brusselsSprouts;
 
 const brusselsStep1 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[0]);
-  }, 1000);
+  resolve(brusselsSteps[0]);
 });
 
 const brusselsStep2 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[1]);
-  }, 1000);
+  resolve(brusselsSteps[1]);
 });
 
 const brusselsStep3 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[2]);
-  }, 1000);
+  resolve(brusselsSteps[2]);
 });
 
 const brusselsStep4 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[3]);
-  }, 1000);
+  resolve(brusselsSteps[3]);
 });
 
 const brusselsStep5 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[4]);
-  }, 1000);
+  resolve(brusselsSteps[4]);
 });
 
 const brusselsStep6 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[5]);
-  }, 1000);
+  resolve(brusselsSteps[5]);
 });
 
 const brusselsStep7 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[6]);
-  }, 1000);
+  resolve(brusselsSteps[6]);
 });
 
 const brusselsStep8 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(brusselsSteps[7]);
-  }, 1000);
+  resolve(brusselsSteps[7]);
 });
 
 Promise.all([
@@ -207,10 +197,20 @@ Promise.all([
   brusselsStep6,
   brusselsStep7,
   brusselsStep8,
-]).then((valuesArr) => {
-  valuesArr.forEach((steps) => {
-    document.querySelector("#brusselsSprouts").innerHTML += `<li>${steps}</li>`;
+])
+  .then((valuesArr) => {
+    valuesArr.forEach((steps) => {
+      document.querySelector(
+        "#brusselsSprouts"
+      ).innerHTML += `<li>${steps}</li>`;
+    });
     document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+  })
+  .catch((err) => {
+    console.log(err);
   });
-  document;
-});
+
+// BONUS 2 NOTES
+//
+// THE FUNCTION obtainInstrution allready has the value from the "new Promise"
+// In that way should I declare the steps like "p1 = obtainInstrution('brusselsSprout', 0) --- (from obtaininstruction.js); for each one, instead create a new promise"
